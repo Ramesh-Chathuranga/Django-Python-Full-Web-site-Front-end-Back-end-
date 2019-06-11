@@ -1,0 +1,31 @@
+.container-fluid{
+  position:relative;
+  top:1px;
+  padding: 2px;
+}
+.fas:hover{
+  color:white;
+}
+.fas:active{
+  color:gray;
+}
+
+
+a{
+   text-decoration: none !important;
+   color:black;
+}
+
+a:hover{
+   text-decoration: none !important;
+   color:black;
+}
+
+
+.float-left{
+  margin:5px;
+}
+
+form{
+  padding :20px;
+}

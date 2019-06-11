@@ -1,0 +1,63 @@
+
+{% extends 'miriapp/base.html' %}
+{% block body %}
+    <div class="detail row">
+        <div class="cols-sm-1"></div>
+           <div class="cols-sm-4">
+              <div class="row" >
+                   <div class="col-sm-2" >
+                      <img src="{{company.logo.url}}" class="rounded mx-auto d-block">
+                   </div>
+              </div>
+
+                <div class="row">
+                     <div class="col-sm-12" >
+                        <label> Company Name :</label>  <br>   <h1> {{company.name}}</h1>
+                        <label> Company Web Site :</label> <br> <h3>{{company.website}}</h3>
+                        <label> Company E-Mail :</label><br/>    <h3>{{company.email}}</h3>
+
+                     </div>
+                    <a href="{% url 'employee-add' %}"  class="btn btn-light"><i class="fas fa-plus"> <b>Add Employee</b></i> </a>
+                </div>
+           </div>
+
+<!--          <div class="cols-sm-1"></div>-->
+         <div class="cols-sm-7">
+             <table class=" table table-hover ">
+                <thead >
+                       <tr >
+                           <th > </th>
+                           <th > </th>
+                            <th >Employee Name </th>
+                           <th>Phone Number </th>
+                           <th > E-Mail </th>
+
+                       </tr>
+                </thead>
+                 <tbody>
+                               {% for employee in company.employee_set.all %}
+                                 <tr>
+                                     <td>
+<!--                                                     delete company-->
+                                         <form class="" action="{% url 'employee-delete' employee.pk %}" method="post" style="display:inline;">
+                                         {% csrf_token %}
+                                            <input type="hidden" name="employee_id" value="{{employee.id}}"/>
+                                            <button type="submit" class="btn btn-light"><i class="fas fa-trash"></i></button>
+                                         </form>
+                                     </td>
+                                     <td>
+                                             <button class="btn btn-light" type="button"><a href="{% url 'employee-update' employee.pk %}" class="btn btn-light"><i class="fas fa-level-up-alt"></i></a></button>
+                                     </td>
+                                     <td>{{employee.first_name}} - {{employee.last_name}}</td> <td> {{employee.phone}} </td> <td>{{employee.email}}</td> </tr>
+                               {% endfor %}
+                 </tbody>
+
+
+            </table>
+         </div>
+
+
+      </div>
+
+{% endblock %}
+

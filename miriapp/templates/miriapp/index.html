@@ -1,0 +1,53 @@
+
+{% extends 'miriapp/base.html' %}
+
+{% block body %}
+    {% if company_list %}
+
+
+                   <url>
+                        {% for company in company_list %}
+                        <div class="float-left">
+                          <li>
+                              <a href="{% url 'detail' company.id %}" class="link">
+                                <div class="">
+
+                                    <div class="card " style="width: 18rem;">
+                                      <img src="{{ company.logo.url }}" class="card-img-top">
+                                      <div class="card-body">
+                                          <h5 class="card-title"><h3>{{company.name}}</h3></h5>
+                                          <p class="card-text"><h5>{{company.website}}</h5></p>
+                                          <p class="card-text"><h5>{{company.email}}</h5></p><br/>
+                                           <div class="row">
+                                               <div class="col-sm-6">
+<!--                                                     delete company-->
+                                                     <form class="" action="{% url 'company-delete' company.pk %}" method="post" style="display:inline;">
+                                                          {% csrf_token %}
+                                                          <input type="hidden" name="company_id" value="{{company.id}}"/>
+                                                          <button type="submit" class="btn btn-light"><i class="fas fa-trash"></i></button>
+                                                     </form>
+
+                                               </div>
+                                               <div class="col-sm-6">
+                                                     <button class="btn btn-light" type="button"><a href="{% url 'company-update' company.pk %}" class="btn btn-light"><i class="fas fa-level-up-alt"></i></a></button>
+                                               </div>
+                                           </div>
+                                      </div>
+                                    </div>
+                                </div>
+                              </a>
+                          </li>
+                        </div>
+                        {% endfor %}
+                   </url>
+
+        {% else %}
+               <h3>You don't have any companys</h3>
+    {% endif %}
+{% endblock %}
+
+
+
+
+
+
